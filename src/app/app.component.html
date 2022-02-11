@@ -1,10 +1,10 @@
 <section class="app-container">
-  <ng-template [ngIf]="(isLogged$ | async) === false">
+  <!-- <ng-template [ngIf]="(isLogged$ | async) === false">
     <app-login-page></app-login-page>
-  </ng-template>
-  <ng-template [ngIf]="(isLogged$ | async) === true">
+  </ng-template> -->
+  <ng-template [ngIf]="true">
     <app-tasks-page></app-tasks-page>
   </ng-template>
 
-  {{isLogged$ | async}}
 </section>
+{{isLogged$ | async}}

@@ -2,4 +2,30 @@
 
 .navbar {
   background-color: $dark-blue;
+  padding: $spacing $spacing * 2;
+
+  .navbar__wrapper {
+    display: flex;
+    justify-content: space-between;
+
+    div {
+      display: flex;
+    }
+
+    .navbar__logout {
+      margin-right: $spacing * 2;
+      background-color: $soft-black;
+      border-radius: 4px;
+      border: none;
+      padding: $spacing;
+      color: $white;
+      cursor: pointer;
+      width: 100%;
+      min-width: 90px;
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
 }

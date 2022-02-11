@@ -1,7 +1,8 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { User } from "src/User";
+import { LocalStorageService } from "./LocalStorageService";
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +12,19 @@ export class AccountService {
   constructor(private httpClient: HttpClient) { }
 
   public accountUrl = `http://localhost:3000/account`
-  private isLogged = new BehaviorSubject<boolean>(false)
+  private isLogged = new BehaviorSubject<boolean>(undefined)
 
-  public login(user: User) {
-    return this.httpClient.post(this.accountUrl, { user })
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+  });
+
+  public login(user: User): Observable<User> {
+    return this.httpClient.post<User>(this.accountUrl, { user },
+      { headers: this.headers })
+  }
+
+  public logout() {
+    return this.httpClient.delete<User>(this.accountUrl)
   }
 
   public isUserLogged(): Observable<boolean> {
