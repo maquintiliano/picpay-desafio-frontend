@@ -15,8 +15,8 @@ export class AppComponent implements OnInit {
   private subscriptions: Subscription[] = []
 
   ngOnInit(): void {
-    console.log('oi')
-    this.isLogged$ = this.accountService.isUserLogged()
-    console.log(this.isLogged$)
+    // console.log('oi')
+    // this.isLogged$ = this.accountService.isUserLogged()
+    // console.log(this.isLogged$)
   }
 }

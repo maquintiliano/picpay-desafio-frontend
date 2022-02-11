@@ -7,6 +7,7 @@ import { LoginPageModule } from 'src/pages/login-page/login-page.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { LocalStorageService } from 'src/services/LocalStorageService';
 import { TasksPageModule } from 'src/pages/tasks-page/tasks-page.module';
+import { NavbarModule } from 'src/components/navbar/navbar.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { TasksPageModule } from 'src/pages/tasks-page/tasks-page.module';
     HttpClientModule,
     LoginPageModule,
     NoopAnimationsModule,
-    TasksPageModule
+    TasksPageModule,
+    NavbarModule,
   ],
   providers: [LocalStorageService],
   bootstrap: [AppComponent]

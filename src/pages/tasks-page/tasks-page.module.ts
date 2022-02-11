@@ -1,6 +1,7 @@
 import { NgModule } from "@angular/core";
 import { NavbarModule } from "src/components/navbar/navbar.module";
 import { TasksPageComponent } from "./tasks-page.component";
+import { TableComponentModule } from "src/components/table/table.component.module";
 
 @NgModule({
   declarations: [
@@ -9,7 +10,7 @@ import { TasksPageComponent } from "./tasks-page.component";
   exports: [
     TasksPageComponent
   ],
-  imports: [NavbarModule],
+  imports: [NavbarModule, TableComponentModule],
   providers: []
 })
 export class TasksPageModule { }

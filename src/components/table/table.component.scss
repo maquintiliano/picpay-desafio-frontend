@@ -1,0 +1,40 @@
+@import "../../variables.scss";
+
+.table__container {
+  border-radius: 8px;
+  background-color: $white;
+  font-family: 'Lato', sans-serif;
+}
+
+table.mat-table {
+  width: 100%;
+}
+
+.mat-row:hover {
+  .table__icon {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.mat-cell {
+  max-width: 50px;
+  min-width: 50px;
+}
+
+.mat-column {
+  flex: none;
+}
+
+.table__icon {
+  display: none;
+}
+
+.table__icons-wrapper {
+  display: flex;
+  justify-content: center;
+
+  img + img {
+    padding-left: $spacing / 2;
+  }
+}
