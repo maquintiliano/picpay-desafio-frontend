@@ -1,0 +1,80 @@
+@import "../../variables.scss";
+
+.login-page__section {
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  flex-basis: 1;
+
+}
+
+.login-page__data-bg {
+  background-color: $grey;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-page__data-wrapper {
+  padding: 4rem;
+}
+
+.login-page__illustration {
+  display: flex;
+  align-items: center;
+  flex: 1.2;
+}
+
+.login-page__subtitle {
+  font-family: 'Montserrat', sans-serif;
+  color: $black;
+  font-size: $regular-title;
+  margin-top: $spacing;
+}
+
+.login-page__form-wrapper {
+  .input-wrapper + .input-wrapper {
+    margin-top: $spacing * 1.5;
+  }
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: $spacing * 2;
+
+  label {
+    font-size: $small-text;
+    color: $soft-black;
+    margin-bottom: $spacing/4;
+  }
+
+  input {
+    cursor: pointer;
+    height: 2.5rem;
+    padding: $spacing;
+    background-color: transparent;
+    border: 1px solid $soft-black;
+    border-radius: 3px;
+  }
+}
+
+.submit {
+  background-color: $light-blue;
+  height: 2rem;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 4px;
+  color: $white;
+  text-transform: uppercase;
+  font-size: $small-text;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+
+  &:disabled {
+    background-color: $soft-black;
+  }
+}

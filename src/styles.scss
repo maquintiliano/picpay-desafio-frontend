@@ -2,9 +2,15 @@
   box-sizing: border-box;
 }
 
-html,
+html, body { height: 100%; }
 body {
-  font-family: sans-serif;
   margin: 0;
-  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  display: grid;
+  grid-gap: 1em;
+  grid-template-rows: auto;
+  min-height: 100vh;
 }
