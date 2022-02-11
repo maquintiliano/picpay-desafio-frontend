@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { User } from "src/User";
+import { User } from "src/utils/interfaces/User";
 import { LocalStorageService } from "./LocalStorageService";
 
 @Injectable({

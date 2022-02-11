@@ -1,22 +1,7 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface Payment {
-  name: string;
-  title: string;
-  date: Date;
-  value: string;
-  payed: boolean;
-  edit: boolean;
-}
-
-const ELEMENT_DATA: Payment[] = [
-  { title: 'professor', date: new Date(), value: '40', payed: false, name: 'Hydrogen', edit: false },
-  { title: 'professor', date: new Date(), value: '40', payed: false, name: 'Helium', edit: false },
-  { title: 'professor', date: new Date(), value: '40', payed: false, name: 'Lithium', edit: false },
-  { title: 'professor', date: new Date(), value: '40', payed: false, name: 'Beryllium', edit: false },
-];
+import { Payment } from 'src/utils/interfaces/Payment';
 
 @Component({
   selector: 'app-table',
@@ -26,25 +11,23 @@ const ELEMENT_DATA: Payment[] = [
 
 export class TableComponent implements OnInit, AfterViewInit {
 
-  displayedColumns: string[] = ['name', 'title', 'value', 'edit'];
-  dataSource = new MatTableDataSource<Payment>(ELEMENT_DATA);
+  @Input() data: Payment[]
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed'];
+  public dataSource;
 
   public showOptions: boolean = false;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   ngAfterViewInit() {
+    console.log(this.data)
+    this.dataSource = new MatTableDataSource<Payment>(this.data || []);
     this.dataSource.paginator = this.paginator;
-    console.log(this.dataSource)
   }
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
-  public handleMouseOver(row) {
-
-  }
-
 }

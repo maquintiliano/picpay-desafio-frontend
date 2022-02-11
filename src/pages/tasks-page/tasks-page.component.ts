@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { PaymentsService } from 'src/services/PaymentService';
+import { Payment } from 'src/utils/interfaces/Payment';
 
 @Component({
   selector: 'app-tasks-page',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class TasksPageComponent implements OnInit {
-  constructor() { }
+  constructor(private paymentsService: PaymentsService,
+    private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
+  public paymentsData: Payment[] = []
+
+  ngOnInit() {
+    this.paymentsService.getPayments().subscribe((paymentsList: Payment[]) => {
+      console.log(paymentsList)
+      this.paymentsData = paymentsList
+      this.changeDetectorRef.detectChanges();
+    })
   }
-
 }

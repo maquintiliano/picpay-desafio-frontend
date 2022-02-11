@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/services/AccountService';
 import { LocalStorageService } from 'src/services/LocalStorageService';
-import { User } from 'src/User';
+import { User } from 'src/utils/interfaces/User';
 
 @Component({
   selector: 'app-login-page',
