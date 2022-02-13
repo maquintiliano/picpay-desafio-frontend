@@ -1,0 +1,24 @@
+<H3>Meus Pagamentos</H3>
+<button class="btn btn-sm btn-primary float-right" (click)="openModal()">ADICIONAR PAGAMENTO</button>
+<div class="container content mt-5">
+    <app-table [items]="pagamentos" (filters)="filter($event)">
+        <tr header>
+            <th scope="col">Usuario <em class="fas fa-sort"></em></th>
+            <th scope="col">Ttulo<em class="fas fa-sort"></em></th>
+            <th scope="col">Data<em class="fas fa-sort"></em></th>
+            <th scope="col">Valor<em class="fas fa-sort"></em></th>
+            <th scope="col">Pago<em class="fas fa-sort"></em></th>
+            <th scope="col"></th>
+        </tr>
+        <ng-template appTableBody let-item>
+            <tr>
+                <th scope="row">{{ item.name }} <br><small>@{{ item.username }}</small></th>
+                <td>{{ item.title }}</td>
+                <td>{{ item.date }} <br><small>{{ item.hours}}</small></td>
+                <td>{{ item.value }}</td>
+                <td><input type="checkbox" value="true" [checked]="item.isPayed"></td>
+                <td><em class="fa fa-pencil mr-3"></em> <em class="fa fas far fa-times-circle"  (click)="remover(item)"></em></td>
+            </tr>
+        </ng-template>
+    </app-table>
+</div>
