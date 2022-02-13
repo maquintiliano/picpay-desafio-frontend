@@ -1,0 +1,126 @@
+.content {
+    width: 100%;
+    height: 100vh;
+    background-color: ¨#F2F2F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  
+    .login-box {
+      width: 80%;
+      height: 80vh;
+      background-color: #ffffff;
+      z-index: 2;
+  
+      display: flex;
+      flex-direction: row;
+  
+      .box-left {
+        width: 50%;
+        height: 100%;
+        background-color:#fff;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+  
+        .text-logo{
+          color: #fff;
+          font-weight: 900;
+        }
+  
+        .brand-image {
+          max-width: 50%;
+          height: auto;
+        }
+      }
+      .box-right {
+        width: 50%;
+        height: 100%;
+        background-color: #fff;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+  
+        form {
+          width: 80%;
+          color: #fff;
+          a {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  
+  #background {
+    position: fixed;
+    background-color: #fff;
+    z-index: 1;
+    &:after {
+      content: "";
+      position: absolute;
+      width: 30%;
+      height: 100%;
+      border-left: 0px solid transparent;
+      border-right: 141px solid transparent;
+      border-bottom: 5000px solid #fff;
+      left: -38px;
+    }
+  }
+  
+  @media (max-width: 575.9px) {
+    .content .login-box {
+      width: 90% !important;
+      height: 90%;
+      flex-direction: column !important;
+  
+      .box-left {
+        width: 100%;
+        height: 40vh;
+  
+        img {
+          width: 150px;
+        }
+      }
+      .box-right{
+        width: 100%;
+        height: 60vh;
+      }
+    }
+  
+    #background {
+      bottom: 0px !important;
+      left: 0px !important;
+      right: 0px !important;
+      width: 100% !important;
+      height: 50% !important;
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 991.98px) {
+    .content .login-box {
+      width: 90% !important;
+    }
+  
+    #background {
+      top: 0px;
+      right: 0px;
+      width: 50%;
+      height: 100%;
+    }
+  }
+  
+  @media (min-width: 992px) {
+    #background {
+      top: 0px;
+      right: 0px;
+      width: 50%;
+      height: 100%;
+    }
+  }

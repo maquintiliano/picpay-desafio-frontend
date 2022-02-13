@@ -1,0 +1,56 @@
+<div class="content">
+    <div class="login-box">
+      <div class="box-left " style="background-color:#F2F2F2;">
+          <h2 class="text-logo mb-0 mt-3" style="color: #001f3f;">PayFriends</h2>
+          <p>Bem vindo de volta</p>
+        <form [formGroup]="form">
+            <div>
+                <div class="label-float">
+                    <input type="text" placeholder=" " formControlName="email" inputmode="email" [ngClass]="[
+                    isFieldValid(form, 'email') ? 'required' : ''
+                    ]"/>
+                    <label>Email</label>
+                    <div class="mt-1 text-danger text-monospace" *ngIf="isFieldValid(form, 'email')">
+                        <small>{{ form.getFirstErrorFrom('email', 'email') }}</small>
+                    </div>
+                  </div>
+              
+
+                  <div class="label-float">
+                    <input type="text" placeholder=" " formControlName="password" inputmode="text" [ngClass]="[
+                    isFieldValid(form, 'password') ? 'required' : ''
+                    ]"/>
+                    <label>password</label>
+                    <div class="mt-1 text-danger text-monospace" *ngIf="isFieldValid(form, 'password')">
+                        <small>{{ form.getFirstErrorFrom('password', 'password') }}</small>
+                    </div>
+                  </div>
+                 <button type="button" class="btn btn-primary mt-4 col-12" (click)="submit()">entrar</button>
+            </div>
+        </form>
+      </div>
+      <div class="box-right" style="background-color:#FFFFFF;">
+        <img src="../../../../../assets/man-doing-online-payment 1.jpg" alt="img">
+      </div>
+    </div>
+  </div>
+  <div id="background"></div>
+
+
+
+    <!-- <div class="input-group label-float">
+                    <input [type]="typeInput" placeholder=" " formControlName="password" style="border-right: none;" [ngClass]="[
+                    isFieldValid(form, 'password') ? 'required' : ''
+                    ]">
+                    <div class="input-group-append">
+                        <label>Senha</label>
+                        <div class="input-group-text" 
+                            style="border-left: none; background-color: #F2F2F2;">
+                            <em class="fa far fa-eye" (click)="viewPassword()">
+                            </em>
+                        </div>
+                      </div>
+                      <div class="mt-1 text-danger text-monospace" *ngIf="isFieldValid(form, 'email')">
+                        <small>{{ form.getFirstErrorFrom('email', 'email') }}</small>
+                    </div>
+                  </div> -->

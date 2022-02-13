@@ -4,8 +4,8 @@
    <h6 class="mb-0">Data: <small>{{ dataSource.date }}</small></h6> 
    <h6 class="mb-0">Valor: <small>{{ dataSource.value }}</small></h6> 
    <div>
-    <button class="btn btn-sm btn-light col-4 float-left mb-4 mt-4" (click)="closeModal()">Cancelar</button>
-    <button class="btn btn-sm btn-primary col-4 float-right mb-4 mt-4" (click)="delete(dataSource.id)">Salvar</button>
+    <button class="btn btn-sm btn-light col-4 float-left mb-4 mt-4"  title="cancelar" (click)="closeModal()">Cancelar</button>
+    <button class="btn btn-sm btn-primary col-4 float-right mb-4 mt-4"  title="salvar" (click)="delete(dataSource.id)">Salvar</button>
    </div>
 </div>
 </app-template-modal>

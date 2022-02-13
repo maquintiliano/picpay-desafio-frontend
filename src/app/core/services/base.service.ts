@@ -27,7 +27,7 @@ export class BaseService<T> {
   }
 
   public getByFilter = (params?: URLSearchParams): Observable<any> => {
-    const filters = params ? `?${params}` : '';
+    const filters = params ? `?${params.toString()}` : '';
     return this.httpClient
       .get(`${this.baseUrl}${this.path}${filters}`)
       .pipe(catchError((e: HttpErrorResponse) => throwError(e)));
