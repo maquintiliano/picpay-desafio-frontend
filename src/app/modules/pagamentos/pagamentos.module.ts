@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import { PagamentosComponent } from './page/pagamentos/pagamentos.component';
 import { PAGAMENTOS_ROUTES } from './pagamentos-routing.module';
-import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
 import { ExcluirComponent } from './components/excluir/excluir.component';
@@ -17,7 +20,9 @@ import { ExcluirComponent } from './components/excluir/excluir.component';
     RouterModule.forChild(PAGAMENTOS_ROUTES),
     HttpClientModule,
     NgxPaginationModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [NgxPaginationModule]
 })

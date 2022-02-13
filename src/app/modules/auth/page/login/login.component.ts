@@ -28,7 +28,7 @@ export class LoginComponent {
 
   public isFieldValid(form: FormGroup, field: string) {
     return !form.get(field).valid && form.get(field).dirty;
-}
+  }
 
   public viewPassword(): void {
     if (this.typeInput === 'text') {
@@ -40,16 +40,12 @@ export class LoginComponent {
 
   public submit(): void {
     this.form.markAllAsTouched();
-   if (this.form.valid) {
-    const email: string = this.form.email.value;
-    const password: string = this.form.password.value;
-    const params: URLSearchParams = new URLSearchParams();
-    if (email && password) {
-      params.append('email', decodeURI(email));
-      params.append('password', password);
-      this.get(params);
+    if (this.form.valid) {
+        const params: URLSearchParams = new URLSearchParams();
+        params.append('email', this.form.email.value);
+        params.append('password', this.form.password.value);
+        this.get(params);
     }
-   }
   }
 
   public get(params: URLSearchParams): void {

@@ -1,4 +1,4 @@
 export const urlConfigs = Object.freeze({
     url_tasks: 'tasks',
-    url_account: 'accounts'
+    url_account: 'account'
 })

@@ -1,6 +1,6 @@
 <div class="content">
     <div class="login-box">
-      <div class="box-left " style="background-color:#F2F2F2;">
+      <div class="box-left" style="background-color:#F2F2F2;">
           <h2 class="text-logo mb-0 mt-3" style="color: #001f3f;">PayFriends</h2>
           <p>Bem vindo de volta</p>
         <form [formGroup]="form">
@@ -17,7 +17,7 @@
               
 
                   <div class="label-float">
-                    <input type="text" placeholder=" " formControlName="password" inputmode="text" [ngClass]="[
+                    <input type="password" placeholder=" " formControlName="password" inputmode="text" [ngClass]="[
                     isFieldValid(form, 'password') ? 'required' : ''
                     ]"/>
                     <label>password</label>

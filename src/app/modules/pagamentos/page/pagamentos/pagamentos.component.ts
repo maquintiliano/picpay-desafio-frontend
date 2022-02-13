@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
+
 import { PagamentosInfoDto } from 'src/app/core/dtos/pagamentos-info-dto';
 import { Utils } from 'src/app/core/utils/Utils';
 import { CadastroComponent } from '../../components/cadastro/cadastro.component';
@@ -55,7 +56,24 @@ export class PagamentosComponent implements OnInit {
   });
   }
 
+  public update(item: PagamentosInfoDto): void {
+   const modalRef = Utils.openModal(this.modalService, CadastroComponent, 'lg');
+   modalRef.componentInstance.dataSource = item;
+   modalRef.componentInstance.title = 'Atualizar pagamento';
+   modalRef.result.then(result => {
+    if (result) {
+      this.getAll();
+    }
+  });
+  }
+
   public openModal(): void {
-    Utils.openModal(this.modalService, CadastroComponent, 'lg');
+    const modalRef = Utils.openModal(this.modalService, CadastroComponent, 'lg');
+    modalRef.componentInstance.title = 'Adicionar pagamento';
+    modalRef.result.then(result => {
+      if (result) {
+        this.getAll();
+      }
+    });
   }
 }

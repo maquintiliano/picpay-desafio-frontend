@@ -17,7 +17,10 @@
                 <td>{{ item.date }} <br><small>{{ item.hours}}</small></td>
                 <td>{{ item.value }}</td>
                 <td><input type="checkbox" value="true" [checked]="item.isPayed"></td>
-                <td><em class="fa fa-pencil mr-3" title="editar"></em> <em class="fa fas far fa-times-circle"  title="remover" (click)="remover(item)"></em></td>
+                <td>
+                    <em class="fa fa-pencil mr-3" title="editar" (click)="update(item)"></em>
+                    <em class="fa fas far fa-times-circle" title="remover" (click)="remover(item)"></em>
+                </td>
             </tr>
         </ng-template>
     </app-table>
