@@ -12,8 +12,8 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   public closeModal() {
     this.activeModal.close();
   }
-
 }

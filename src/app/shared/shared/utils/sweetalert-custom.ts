@@ -3,7 +3,6 @@ import { SweetAlertType } from '../types/sweet-alert.type';
 
 
 export class SweetalertCustom {
-    constructor() { }
 
     /**
      * Função para exibir o alerta pelo tempo

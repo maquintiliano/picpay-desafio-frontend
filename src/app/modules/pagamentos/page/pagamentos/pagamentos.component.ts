@@ -3,8 +3,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { map } from 'rxjs/operators';
 import { PagamentosInfoDto } from 'src/app/core/dtos/pagamentos-info-dto';
 import { Utils } from 'src/app/core/utils/Utils';
-import { SweetalertCustom } from 'src/app/shared/shared/utils/sweetalert-custom';
 import { CadastroComponent } from '../../components/cadastro/cadastro.component';
+import { ExcluirComponent } from '../../components/excluir/excluir.component';
 import { PagamentoService } from '../../service/pagamento.service';
 
 @Component({
@@ -46,15 +46,13 @@ export class PagamentosComponent implements OnInit {
   }
 
   public remover(item: PagamentosInfoDto): void {
-    SweetalertCustom.showAlertConfirmAndCancel('Excluir pagamento', `Usuario: ${item.name} <br> data: ${item.date} <br> Valor: ${item.value}`).then((res) => {
-      if (!res.isConfirmed) {
-        return;
-      }
-      this.pagamentoService.delete(item.id).subscribe(() => {
-        SweetalertCustom.showAlertTimer2('success', 'Operação realizada com sucesso');
-        this.getAll();
-      });
-    });
+   const modalRef = Utils.openModal(this.modalService, ExcluirComponent, 'lg');
+   modalRef.componentInstance.dataSource = item;
+   modalRef.result.then(result => {
+    if (result) {
+      this.getAll();
+    }
+  });
   }
 
   public openModal(): void {

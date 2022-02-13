@@ -1,9 +1,5 @@
-<div class="modal-header">
-    <h4 class="modal-title">Adicionar Pagamento</h4>
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeModal()">
-      <span aria-hidden="true">×</span>
-    </button>
-  </div>
-  <div>
-      
-  </div>
+<app-template-modal (close)="closeModal()" [title]="'Adicionar Pagamento'">
+    <div conteudo>
+       conteudo
+    </div>
+</app-template-modal>

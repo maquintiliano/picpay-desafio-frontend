@@ -7,10 +7,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CadastroComponent } from './components/cadastro/cadastro.component';
+import { ExcluirComponent } from './components/excluir/excluir.component';
 
 
 @NgModule({
-  declarations: [PagamentosComponent, CadastroComponent],
+  declarations: [PagamentosComponent, CadastroComponent, ExcluirComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(PAGAMENTOS_ROUTES),
