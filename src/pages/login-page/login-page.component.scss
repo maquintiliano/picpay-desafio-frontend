@@ -78,3 +78,9 @@
     background-color: $soft-black;
   }
 }
+
+.login-page__error-feedback {
+  margin-top: $spacing;
+  color: $red;
+  font-size: $small-text;
+}

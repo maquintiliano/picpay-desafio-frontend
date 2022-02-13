@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/services/AccountService';
@@ -16,24 +16,42 @@ export class LoginPageComponent implements OnDestroy {
     private accountService: AccountService,
     private localStorage: LocalStorageService) { }
 
-  loginForm = this.formBuilder.group({
+  public loginForm = this.formBuilder.group({
     email: '',
     password: ''
   });
 
-  private subscriptions: Subscription[] = []
+  private subscriptions: Subscription[] = [];
+  public errorFeedback: boolean = false;
 
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe())
   }
 
-  public storeLoginCredentials(user: User): void {
-    this.localStorage.set('id', user.id)
-  }
-
   public onSubmit(): void {
     const userInfos: User = this.loginForm?.value
-    this.subscriptions.push(this.accountService.login(userInfos)
-      .subscribe((user: User) => { this.storeLoginCredentials(user) }))
+    // this.accountService.login(userInfos)
+    // this.subscriptions.push(
+    //   this.accountService.bla(userInfos).subscribe(
+    //     () => this.storeLoginCredentials(userInfos),
+    //     () => this.handleLoginFailed(),
+    //   )
+    // )
+  }
+
+  public storeLoginCredentials(user: User): void {
+    this.localStorage.set('id', user.id)
+    console.log('deu bom')
+  }
+
+  private handleLoginFailed(): void {
+    console.log('deu ruim')
+    this.loginForm.reset()
+    this.handleErrorFeedback()
+  }
+
+  private handleErrorFeedback(): void {
+    this.errorFeedback = true;
+    setTimeout(() => { this.errorFeedback = false }, 3000)
   }
 }

@@ -1,8 +1,10 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, concat, Observable, of, scheduled, throwError } from "rxjs";
 import { User } from "src/utils/interfaces/User";
 import { LocalStorageService } from "./LocalStorageService";
+import { concatMapTo, delay, take, switchMap, map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +20,22 @@ export class AccountService {
     'Content-Type': 'application/json',
   });
 
-  public login(user: User): Observable<User> {
-    return this.httpClient.post<User>(this.accountUrl, { user },
-      { headers: this.headers })
+  public bla(currentUser: User) {
+    return this.getAuthenticUserCredentials().subscribe((authenticUser) => { })
+  }
+
+  // public login(currentUser: User) {
+  //   this.getAuthenticUserCredentials()
+  //     .pipe(switchMap(data => return this.isUserAuthentic(data[0], currentUser)))
+  // }
+
+  private getAuthenticUserCredentials() {
+    return this.httpClient.get<User[]>(this.accountUrl)
+  }
+
+  private isUserAuthentic(authenticUser: User, currentUser: User): boolean {
+    return authenticUser.email === currentUser.email &&
+      authenticUser.password === currentUser.password
   }
 
   public logout() {

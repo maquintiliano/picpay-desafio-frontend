@@ -3,11 +3,11 @@
 .table__container {
   border-radius: 8px;
   background-color: $white;
-  font-family: 'Lato', sans-serif;
 }
 
-table.mat-table {
+.mat-table {
   width: 100%;
+  font-family: 'Lato', sans-serif !important;
 }
 
 .mat-row:hover {
@@ -20,6 +20,7 @@ table.mat-table {
 .mat-cell {
   max-width: 50px;
   min-width: 50px;
+  border: none;
 }
 
 .mat-column {
@@ -37,4 +38,20 @@ table.mat-table {
   img + img {
     padding-left: $spacing / 2;
   }
+}
+
+.mat-header-cell {
+  font-weight: 700;
+  font-size: $small-text;
+  border-bottom-color: #CFDCE5;
+  border-bottom-width: 2px;
+  color: $dark-grey;
+}
+
+.mat-paginator, .mat-table, .mat-header-cell {
+  background-color: $white;
+}
+
+.icon__pay {
+  cursor: pointer;
 }

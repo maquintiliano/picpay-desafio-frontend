@@ -13,6 +13,7 @@
           <input type="password" name="password" placeholder="Digite sua senha" formControlName="password" required>
         </div>
         <button class="submit" [disabled]="!loginForm.valid">Entrar</button>
+        <p *ngIf="errorFeedback" class="login-page__error-feedback">Ops, alguma coisa deu errado. Tente novamente!</p>
       </form>
     </div>
   </div>

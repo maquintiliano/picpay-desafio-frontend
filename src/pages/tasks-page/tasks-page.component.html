@@ -1,9 +1,12 @@
-<section class="tasks-page__container">
+<section class="tasks-page__container" *ngIf="paymentsData.length">
   <div class="tasks-page__header">
     <h2 class="tasks-page__title">Meus pagamentos</h2>
-    <button>Adicionar pagamento</button>
+    <button (click)="onAddPayment()">Adicionar pagamento</button>
   </div>
   <div>
-    <app-table [data]="paymentsData"></app-table>
+    <app-table
+      [data]="paymentsData"
+      (onPaymentChange)="setPaymentStatus($event)">
+    </app-table>
   </div>
 </section>

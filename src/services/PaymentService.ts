@@ -10,9 +10,13 @@ import { Payment } from "src/utils/interfaces/Payment";
 export class PaymentsService {
   constructor(private httpClient: HttpClient) { }
 
-  public paymentsUrl = `http://localhost:3000/tasks`
+  public paymentsUrl = 'http://localhost:3000/tasks'
 
   public getPayments(): Observable<Payment[]> {
     return this.httpClient.get<Payment[]>(this.paymentsUrl)
+  }
+
+  public setPaymentStatus(payment: Payment): Observable<Payment> {
+    return this.httpClient.put<Payment>(`${this.paymentsUrl}/${payment.id}`, payment)
   }
 }

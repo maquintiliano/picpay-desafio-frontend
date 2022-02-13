@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Payment } from 'src/utils/interfaces/Payment';
@@ -9,9 +9,10 @@ import { Payment } from 'src/utils/interfaces/Payment';
   styleUrls: ['./table.component.scss']
 })
 
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit {
 
   @Input() data: Payment[]
+  @Output() onPaymentChange = new EventEmitter<Payment>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed'];
@@ -19,15 +20,14 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   public showOptions: boolean = false;
 
+  constructor() { }
 
-  ngAfterViewInit() {
-    console.log(this.data)
+  ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Payment>(this.data || []);
     this.dataSource.paginator = this.paginator;
   }
 
-  constructor() { }
-
-  ngOnInit(): void {
+  public setPaymentStatus(payment: Payment) {
+    this.onPaymentChange.emit(payment)
   }
 }

@@ -1,8 +1,7 @@
 import { NgModule } from "@angular/core";
 import { LoginPageComponent } from "./login-page.component";
 import { ReactiveFormsModule } from "@angular/forms";
-import { AccountService } from "src/services/AccountService";
-import { LocalStorageService } from "src/services/LocalStorageService";
+import { BrowserModule } from "@angular/platform-browser";
 
 @NgModule({
   declarations: [
@@ -11,7 +10,6 @@ import { LocalStorageService } from "src/services/LocalStorageService";
   exports: [
     LoginPageComponent
   ],
-  imports: [ReactiveFormsModule],
-  providers: [AccountService, LocalStorageService]
+  imports: [ReactiveFormsModule, BrowserModule]
 })
 export class LoginPageModule { }
