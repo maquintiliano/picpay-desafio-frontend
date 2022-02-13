@@ -16,7 +16,11 @@ export class PaymentsService {
     return this.httpClient.get<Payment[]>(this.paymentsUrl)
   }
 
+  public postNewPayment(newPayment: Payment): Observable<Payment> {
+    return this.httpClient.post<Payment>(this.paymentsUrl, newPayment)
+  }
+
   public setPaymentStatus(payment: Payment): Observable<Payment> {
-    return this.httpClient.put<Payment>(`${this.paymentsUrl}/${payment.id}`, payment)
+    return this.httpClient.post<Payment>(`${this.paymentsUrl}/${payment.id}`, payment)
   }
 }

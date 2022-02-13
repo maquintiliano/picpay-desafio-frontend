@@ -19,6 +19,6 @@
   align-items: flex-start;
 
   button {
-    @include button--primary;
+    @include button($light-blue, $white);
   }
 }

@@ -12,9 +12,11 @@ import { User } from 'src/utils/interfaces/User';
 })
 export class LoginPageComponent implements OnDestroy {
 
-  constructor(private formBuilder: FormBuilder,
+  constructor(
+    private formBuilder: FormBuilder,
     private accountService: AccountService,
-    private localStorage: LocalStorageService) { }
+    private localStorage: LocalStorageService
+  ) { }
 
   public loginForm = this.formBuilder.group({
     email: '',

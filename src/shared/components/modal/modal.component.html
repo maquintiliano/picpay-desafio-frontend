@@ -1,12 +1,29 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
-</div>
+<section class="modal__container">
+  <h1 class="modal__title">{{data.title}}</h1>
+  <form class="modal__form" [formGroup]="addPaymentForm" *ngIf="!data.payment">
+    <div>
+      <input
+        name="username"
+        formControlName="username"
+        placeholder="Usuário*"
+        required>
+      <input
+        formControlName="value"
+        placeholder="Valor*"
+        required>
+    </div>
+    <div>
+      <input
+        formControlName="date"
+        placeholder="Data*"
+        required>
+      <input
+        formControlName="title"
+        placeholder="Título">
+    </div>
+  </form>
+  <div class="modal__ctas">
+    <button (click)="onCancel()" class="button__cancel">Cancelar</button>
+    <button (click)="onSave()" class="button__save submit" [disabled]="!addPaymentForm.valid">Salvar</button>
+  </div>
+</section>

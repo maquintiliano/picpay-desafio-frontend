@@ -46,6 +46,11 @@
   border-bottom-color: #CFDCE5;
   border-bottom-width: 2px;
   color: $dark-grey;
+
+  .edit__remove {
+    display: none;
+    color: gray !important;
+  }
 }
 
 .mat-paginator, .mat-table, .mat-header-cell {

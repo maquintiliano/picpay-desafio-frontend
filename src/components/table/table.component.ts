@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Payment } from 'src/utils/interfaces/Payment';
@@ -15,7 +15,7 @@ export class TableComponent implements OnInit {
   @Output() onPaymentChange = new EventEmitter<Payment>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed'];
+  public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed', 'edit'];
   public dataSource;
 
   public showOptions: boolean = false;

@@ -1,0 +1,53 @@
+@import "../../../variables.scss";
+@import "../../../styles.scss";
+
+.modal__container {
+  background-color: $white;
+  padding: $spacing * 2;
+}
+
+.modal__title {
+  font-family: 'Montserrat', sans-serif;
+  color: $black;
+  font-size: $small-title;
+}
+
+.modal__form {
+  display: block;
+  width: 100%;
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: $spacing * 2;
+
+    input + input {
+      margin-left: $spacing * 2;
+    }
+  }
+}
+
+input{
+  border: 1px solid $grey;
+  height: 54px;
+  border-radius: 3px;
+  padding-left: $spacing;
+  flex: 1;
+}
+
+.modal__ctas {
+  text-align: end;
+
+  button + button {
+    margin-left: $spacing;
+  }
+
+  .button__cancel {
+    @include button($grey, $soft-black);
+  }
+
+  .button__save {
+    @include button($light-blue, $white);
+  }
+}

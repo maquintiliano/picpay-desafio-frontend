@@ -1,7 +1,7 @@
 <section class="tasks-page__container" *ngIf="paymentsData.length">
   <div class="tasks-page__header">
     <h2 class="tasks-page__title">Meus pagamentos</h2>
-    <button (click)="onAddPayment()">Adicionar pagamento</button>
+    <button class="button--primary" (click)="onAddPayment()">Adicionar pagamento</button>
   </div>
   <div>
     <app-table
