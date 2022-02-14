@@ -1,32 +1,43 @@
 <section class="modal__container">
-  <h1 class="modal__title">{{data.title}}</h1>
-  <form class="modal__form" [formGroup]="addPaymentForm" *ngIf="data">
-    <div>
-      <input
-        name="name"
-        formControlName="name"
-        placeholder="Usuário*"
-        required>
-      <input
-        name="value"
-        formControlName="value"
-        placeholder="Valor*"
-        required>
+  <h1 class="modal__header">{{data.title}}</h1>
+  <ng-container *ngIf="data" class="modal__body">
+    <ng-container *ngIf="data.action === PaymentAction.Delete">
+      <div class="modal__delete-infos">
+        <p>Usuário: {{data.payment.name}}</p>
+        <p>Data: {{data.payment.date}}</p>
+        <p>Valor: {{data.payment.value}}</p>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="data.action !== PaymentAction.Delete">
+      <form class="modal__form" [formGroup]="addPaymentForm">
+        <div>
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Usuário*"
+            required>
+          <input
+            formControlName="value"
+            placeholder="Valor* (formato: R$ XX,XX)"
+            required>
+        </div>
+        <div>
+          <input
+            formControlName="date"
+            placeholder="Data* (formato: dd/mm/aaaa)"
+            required>
+          <input
+            type="text"
+            formControlName="title"
+            placeholder="Título">
+        </div>
+      </form>
+    </ng-container>
+    <div class="modal__ctas">
+      <button (click)="onCancel()" class="button__cancel">Cancelar</button>
+      <button (click)="onSave()" class="button__save" [disabled]="!addPaymentForm.valid">
+        {{data.action === PaymentAction.Delete ? 'Excluir' : 'Salvar'}}
+      </button>
     </div>
-    <div>
-      <input
-        name="date"
-        formControlName="date"
-        placeholder="Data*"
-        required>
-      <input
-        name="title"
-        formControlName="title"
-        placeholder="Título">
-    </div>
-  </form>
-  <div class="modal__ctas">
-    <button (click)="onCancel()" class="button__cancel">Cancelar</button>
-    <button (click)="onSave()" class="button__save submit" [disabled]="!addPaymentForm.valid">Salvar</button>
-  </div>
+  </ng-container>
 </section>

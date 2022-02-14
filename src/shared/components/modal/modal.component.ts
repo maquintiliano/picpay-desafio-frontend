@@ -37,10 +37,13 @@ export class ModalComponent implements AfterViewInit {
     title: '',
   });
 
+  public PaymentAction = PaymentAction
+
   ngAfterViewInit(): void {
+    if (!this.data.payment) { return; }
     this.updateFormValues()
     this.changeDetectorRef.detectChanges()
-    this.addPaymentForm.valueChanges.subscribe()
+    console.log(this.data.payment)
   }
 
   private updateFormValues(): void {
@@ -57,7 +60,19 @@ export class ModalComponent implements AfterViewInit {
   public onSave(): void {
     this.addPaymentForm.updateValueAndValidity()
     const action = this.data.action
-    const payment = Object.assign(this.data.payment, this.addPaymentForm.value)
+    const payment = action === PaymentAction.Save ?
+      this.createNewPaymentObject() :
+      Object.assign(this.data.payment, this.addPaymentForm.value)
+
     this.dialogRef.close({ payment, action })
+  }
+
+  private createNewPaymentObject(): Payment {
+    return {
+      name: this.addPaymentForm.value.name,
+      date: this.addPaymentForm.value.date,
+      title: this.addPaymentForm.value.title,
+      value: this.addPaymentForm.value.value
+    }
   }
 }

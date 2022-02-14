@@ -3,7 +3,7 @@ export interface Payment {
   name: string;
   username?: string;
   title: string;
-  value: number;
+  value: any;
   date: string;
   image?: string;
   isPayed?: boolean;

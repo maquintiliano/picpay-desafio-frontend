@@ -6,10 +6,16 @@
   padding: $spacing * 2;
 }
 
-.modal__title {
+.modal__header {
   font-family: 'Montserrat', sans-serif;
   color: $black;
   font-size: $small-title;
+}
+
+.modal__body {
+  font-size: $regular-text;
+  font-family: 'Roboto', sans-serif;
+  color: $black;
 }
 
 .modal__form {
@@ -50,4 +56,8 @@ input{
   .button__save {
     @include button($light-blue, $white);
   }
+}
+
+.modal__delete-infos {
+
 }

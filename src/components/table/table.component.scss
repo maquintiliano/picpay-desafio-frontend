@@ -21,6 +21,16 @@
   max-width: 50px;
   min-width: 50px;
   border: none;
+  padding: $spacing 0;
+
+  .table__cell__row--primary {
+    margin-bottom: 0;
+  }
+
+  .table__cel__row--secondary {
+    font-size: $tiny-text;
+    color: $dark-grey;
+  }
 }
 
 .mat-column {
