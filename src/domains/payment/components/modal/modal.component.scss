@@ -1,9 +1,10 @@
-@import "../../../variables.scss";
-@import "../../../styles.scss";
+@import "src/variables.scss";
+@import "src/styles.scss";
 
 .modal__container {
   background-color: $white;
   padding: $spacing * 2;
+  align-self: center;
 }
 
 .modal__header {

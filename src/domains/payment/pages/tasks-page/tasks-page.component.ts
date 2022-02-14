@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PaymentsService } from 'src/services/PaymentService';
-import { ModalComponent, PaymentAction } from 'src/shared/components/modal/modal.component';
-import { Payment } from 'src/utils/interfaces/Payment';
-import { formatDate, formatCurrency } from 'src/utils/interfaces/functions/format';
+import { PaymentsService } from 'src/domains/payment/services/PaymentService';
+import { ModalComponent, PaymentAction } from 'src/domains/payment/components/modal/modal.component';
+import { Payment } from 'src/domains/payment/models/Payment';
+import { formatDate, formatCurrency } from 'src/domains/payment/utils/format';
 
 interface HandleablePayment {
   payment: Payment

@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, concat, Observable, of, scheduled, throwError } from "rxjs";
-import { User } from "src/utils/interfaces/User";
-import { LocalStorageService } from "./LocalStorageService";
+import { User } from "src/domains/login/models/User";
+import { LocalStorageService } from "../../shared/services/LocalStorageService";
 import { concatMapTo, delay, take, switchMap, map } from 'rxjs/operators';
 
 

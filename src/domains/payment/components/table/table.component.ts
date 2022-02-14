@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Payment } from 'src/utils/interfaces/Payment';
+import { Payment } from 'src/domains/payment/models/Payment';
 
 @Component({
   selector: 'app-table',

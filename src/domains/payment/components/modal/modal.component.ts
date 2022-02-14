@@ -1,6 +1,6 @@
 import { Component, Inject, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Payment } from 'src/utils/interfaces/Payment';
+import { Payment } from 'src/domains/payment/models/Payment';
 import { FormBuilder } from '@angular/forms';
 
 export interface ModalData {

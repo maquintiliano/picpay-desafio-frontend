@@ -3,11 +3,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { LoginPageModule } from 'src/pages/login-page/login-page.module';
+import { LoginPageModule } from 'src/domains/login/pages/login-page/login-page.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { LocalStorageService } from 'src/services/LocalStorageService';
-import { TasksPageModule } from 'src/pages/tasks-page/tasks-page.module';
-import { NavbarModule } from 'src/components/navbar/navbar.module';
+import { LocalStorageService } from 'src/domains/shared/services/LocalStorageService';
+import { TasksPageModule } from 'src/domains/payment/pages/tasks-page/tasks-page.module';
+import { NavbarModule } from 'src/domains/shared/components/navbar/navbar.module';
 @NgModule({
   declarations: [
     AppComponent,

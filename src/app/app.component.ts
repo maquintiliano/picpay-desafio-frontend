@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { AccountService } from 'src/services/AccountService';
-import { User } from 'src/utils/interfaces/User';
+import { AccountService } from 'src/domains/login/services/AccountService';
+import { User } from 'src/domains/login/models/User';
 
 @Component({
   selector: 'app-root',

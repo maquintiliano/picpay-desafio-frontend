@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/services/AccountService';
-import { LocalStorageService } from 'src/services/LocalStorageService';
+import { AccountService } from 'src/domains/login/services/AccountService';
+import { LocalStorageService } from 'src/domains/shared/services/LocalStorageService';
 
 @Component({
   selector: 'app-navbar',
