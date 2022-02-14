@@ -6,6 +6,13 @@ import { FormBuilder } from '@angular/forms';
 export interface ModalData {
   title: string;
   payment: Payment;
+  action: PaymentAction;
+}
+
+export enum PaymentAction {
+  Save = 'save',
+  Edit = 'edit',
+  Delete = 'delete',
 }
 
 @Component({
@@ -24,22 +31,33 @@ export class ModalComponent implements AfterViewInit {
   ) { }
 
   public addPaymentForm = this.formBuilder.group({
-    username: '',
+    name: '',
     value: '',
     date: '',
     title: '',
   });
 
   ngAfterViewInit(): void {
+    this.updateFormValues()
     this.changeDetectorRef.detectChanges()
+    this.addPaymentForm.valueChanges.subscribe()
   }
 
-  public onCancel() {
+  private updateFormValues(): void {
+    this.addPaymentForm.get('name').setValue(this.data.payment.name)
+    this.addPaymentForm.get('value').setValue(this.data.payment.value)
+    this.addPaymentForm.get('date').setValue(this.data.payment.date)
+    this.addPaymentForm.get('title').setValue(this.data.payment.title)
+  }
+
+  public onCancel(): void {
     this.dialogRef.close(null);
   }
 
-  public onSave() {
-    const newPaymentInfos = this.addPaymentForm?.value
-    this.dialogRef.close(newPaymentInfos)
+  public onSave(): void {
+    this.addPaymentForm.updateValueAndValidity()
+    const action = this.data.action
+    const payment = Object.assign(this.data.payment, this.addPaymentForm.value)
+    this.dialogRef.close({ payment, action })
   }
 }

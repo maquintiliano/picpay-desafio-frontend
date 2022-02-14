@@ -13,6 +13,8 @@ export class TableComponent implements OnInit {
 
   @Input() data: Payment[]
   @Output() onPaymentChange = new EventEmitter<Payment>();
+  @Output() onEdit = new EventEmitter<Payment>();
+  @Output() onDelete = new EventEmitter<Payment>();
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed', 'edit'];
@@ -27,7 +29,15 @@ export class TableComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  public setPaymentStatus(payment: Payment) {
+  public setPaymentStatus(payment: Payment): void {
     this.onPaymentChange.emit(payment)
+  }
+
+  public edit(payment: Payment): void {
+    this.onEdit.emit(payment)
+  }
+
+  public delete(payment: Payment): void {
+    this.onDelete.emit(payment)
   }
 }

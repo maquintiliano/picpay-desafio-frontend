@@ -38,8 +38,8 @@
       <th mat-header-cell edit__remove *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">
         <div class="table__icons-wrapper">
-          <img src="assets/edit.svg" class="table__icon">
-          <img src="assets/delete.svg" class="table__icon">
+          <img src="assets/edit.svg" class="table__icon" (click)="edit(element)">
+          <img src="assets/delete.svg" class="table__icon" (click)="delete(element)">
         </div>
       </td>
     </ng-container>

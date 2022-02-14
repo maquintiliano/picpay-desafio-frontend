@@ -6,7 +6,8 @@
   <div>
     <app-table
       [data]="paymentsData"
-      (onPaymentChange)="setPaymentStatus($event)">
+      (onPaymentChange)="updatePayment($event)"
+      (onEdit)="onEditPayment($event)">
     </app-table>
   </div>
 </section>

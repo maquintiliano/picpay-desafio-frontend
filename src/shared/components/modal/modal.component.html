@@ -1,23 +1,26 @@
 <section class="modal__container">
   <h1 class="modal__title">{{data.title}}</h1>
-  <form class="modal__form" [formGroup]="addPaymentForm" *ngIf="!data.payment">
+  <form class="modal__form" [formGroup]="addPaymentForm" *ngIf="data">
     <div>
       <input
-        name="username"
-        formControlName="username"
+        name="name"
+        formControlName="name"
         placeholder="Usuário*"
         required>
       <input
+        name="value"
         formControlName="value"
         placeholder="Valor*"
         required>
     </div>
     <div>
       <input
+        name="date"
         formControlName="date"
         placeholder="Data*"
         required>
       <input
+        name="title"
         formControlName="title"
         placeholder="Título">
     </div>
