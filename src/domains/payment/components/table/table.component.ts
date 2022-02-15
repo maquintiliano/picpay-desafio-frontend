@@ -1,7 +1,7 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Payment } from 'src/domains/payment/models/Payment';
 
 @Component({
@@ -10,7 +10,7 @@ import { Payment } from 'src/domains/payment/models/Payment';
   styleUrls: ['./table.component.scss']
 })
 
-export class TableComponent implements OnInit, AfterViewInit {
+export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() payments: Observable<Payment[]>
   @Output() onPaymentChange = new EventEmitter<Payment>();
   @Output() onEdit = new EventEmitter<Payment>();
@@ -21,20 +21,25 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed', 'edit'];
   public dataSource: MatTableDataSource<Payment>;
+  private subscriptions: Subscription[] = []
 
   constructor() { }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Payment>();
   }
 
-  public ngAfterViewInit(): void {
-    this.payments.subscribe((data) => {
+  ngAfterViewInit(): void {
+    this.subscriptions.push(this.payments.subscribe((data) => {
       if (data.length) {
         this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
       }
-    })
+    }))
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
 
   public applyFilter(event: Event) {

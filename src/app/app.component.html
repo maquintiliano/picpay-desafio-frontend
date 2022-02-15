@@ -1,12 +1,11 @@
 <section class="app-container">
-  <!-- <ng-template [ngIf]="(isLogged$ | async) === false">
-    <app-login-page></app-login-page>
-  </ng-template> -->
-  <ng-template [ngIf]="true">
+  <ng-container *ngIf="isLogged$ | async; else login">
     <app-navbar></app-navbar>
     <app-tasks-page></app-tasks-page>
-  </ng-template>
-  <!-- <app-login-page (onLoginSubmit)="getLoginAttempt($event)"></app-login-page> -->
+  </ng-container>
 
+  <ng-template #login>
+    <app-login-page>
+    </app-login-page>
+  </ng-template>
 </section>
-{{isLogged$ | async}}

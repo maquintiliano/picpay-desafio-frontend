@@ -1,17 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { AccountService } from 'src/domains/login/services/AccountService';
-import { LocalStorageService } from 'src/domains/shared/services/LocalStorageService';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  constructor(private accountService: AccountService,
-    private localStorageService: LocalStorageService) { }
-
-  ngOnInit(): void {
-  }
+  constructor() { }
 }

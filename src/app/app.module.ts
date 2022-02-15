@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { LoginPageModule } from 'src/domains/login/pages/login-page/login-page.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { LocalStorageService } from 'src/domains/shared/services/LocalStorageService';
 import { TasksPageModule } from 'src/domains/payment/pages/tasks-page/tasks-page.module';
 import { NavbarModule } from 'src/domains/shared/components/navbar/navbar.module';
 @NgModule({
@@ -20,7 +19,6 @@ import { NavbarModule } from 'src/domains/shared/components/navbar/navbar.module
     TasksPageModule,
     NavbarModule,
   ],
-  providers: [LocalStorageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

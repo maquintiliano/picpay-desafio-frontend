@@ -2,7 +2,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AccountService } from 'src/domains/login/services/AccountService';
-import { LocalStorageService } from 'src/domains/shared/services/LocalStorageService';
 import { User } from 'src/domains/login/models/User';
 
 @Component({
@@ -15,7 +14,6 @@ export class LoginPageComponent implements OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private accountService: AccountService,
-    private localStorage: LocalStorageService
   ) { }
 
   public loginForm = this.formBuilder.group({
@@ -32,22 +30,15 @@ export class LoginPageComponent implements OnDestroy {
 
   public onSubmit(): void {
     const userInfos: User = this.loginForm?.value
-    // this.accountService.login(userInfos)
-    // this.subscriptions.push(
-    //   this.accountService.bla(userInfos).subscribe(
-    //     () => this.storeLoginCredentials(userInfos),
-    //     () => this.handleLoginFailed(),
-    //   )
-    // )
-  }
-
-  public storeLoginCredentials(user: User): void {
-    this.localStorage.set('id', user.id)
-    console.log('deu bom')
+    this.subscriptions.push(
+      this.accountService.login(userInfos).subscribe(
+        () => this.accountService.setUserLogged(),
+        () => this.handleLoginFailed(),
+      )
+    )
   }
 
   private handleLoginFailed(): void {
-    console.log('deu ruim')
     this.loginForm.reset()
     this.handleErrorFeedback()
   }

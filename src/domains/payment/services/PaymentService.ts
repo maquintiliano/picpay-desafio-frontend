@@ -1,7 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable, Subject } from "rxjs";
-import { take, tap } from "rxjs/operators";
+import { BehaviorSubject, Observable } from "rxjs";
 import { Payment } from "src/domains/payment/models/Payment";
 
 @Injectable({
@@ -33,12 +32,6 @@ export class PaymentsService {
   public setPayments(payments: Payment[]) {
     this.payments.next(payments)
   }
-
-  // private formatPayment(payment: Payment): Payment {
-  //   return {
-  //     value:
-  //   }
-  // }
 
   public getPaymentsBLA(): Observable<Payment[]> {
     console.log('oi')

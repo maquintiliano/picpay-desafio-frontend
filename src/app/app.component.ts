@@ -1,7 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { AccountService } from 'src/domains/login/services/AccountService';
-import { User } from 'src/domains/login/models/User';
 
 @Component({
   selector: 'app-root',
@@ -9,21 +8,11 @@ import { User } from 'src/domains/login/models/User';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  public isLogged$: any;
+  public isLogged$: Observable<boolean>;
 
   constructor(private accountService: AccountService) { }
 
-  private subscriptions: Subscription[] = []
-
   ngOnInit(): void {
-
-    // this.accountService.login()
-    // console.log('oi')
-    // this.isLogged$ = this.accountService.isUserLogged()
-    // console.log(this.isLogged$)
-  }
-
-  getLoginAttempt(currentUser: User) {
-    // this.accountService.login(currentUser)
+    this.isLogged$ = this.accountService.isUserLogged()
   }
 }

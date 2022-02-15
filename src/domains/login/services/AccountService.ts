@@ -1,9 +1,8 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, concat, Observable, of, scheduled, throwError } from "rxjs";
+import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { User } from "src/domains/login/models/User";
-import { LocalStorageService } from "../../shared/services/LocalStorageService";
-import { concatMapTo, delay, take, switchMap, map } from 'rxjs/operators';
+import { mergeMap } from 'rxjs/operators';
 
 
 @Injectable({
@@ -14,32 +13,21 @@ export class AccountService {
   constructor(private httpClient: HttpClient) { }
 
   public accountUrl = `http://localhost:3000/account`
-  private isLogged = new BehaviorSubject<boolean>(undefined)
+  private isLogged = new BehaviorSubject<boolean>(false)
 
-  private headers = new HttpHeaders({
-    'Content-Type': 'application/json',
-  });
-
-  public bla(currentUser: User) {
-    return this.getAuthenticUserCredentials().subscribe((authenticUser) => { })
+  public login(currentUser: User) {
+    return this.getAuthenticUserCredentials().pipe(
+      mergeMap(authenticUser => this.isUserAuthentic(authenticUser[0], currentUser))
+    )
   }
-
-  // public login(currentUser: User) {
-  //   this.getAuthenticUserCredentials()
-  //     .pipe(switchMap(data => return this.isUserAuthentic(data[0], currentUser)))
-  // }
 
   private getAuthenticUserCredentials() {
     return this.httpClient.get<User[]>(this.accountUrl)
   }
 
-  private isUserAuthentic(authenticUser: User, currentUser: User): boolean {
-    return authenticUser.email === currentUser.email &&
-      authenticUser.password === currentUser.password
-  }
-
-  public logout() {
-    return this.httpClient.delete<User>(this.accountUrl)
+  private isUserAuthentic(authenticUser: User, currentUser: User): Observable<boolean> {
+    return (authenticUser.email === currentUser.email &&
+      authenticUser.password === currentUser.password) ? of(true) : throwError(false)
   }
 
   public isUserLogged(): Observable<boolean> {
@@ -48,9 +36,5 @@ export class AccountService {
 
   public setUserLogged(): void {
     this.isLogged.next(true)
-  }
-
-  public setUserLoggedOut(): void {
-    this.isLogged.next(false)
   }
 }

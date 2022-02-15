@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PaymentsService } from 'src/domains/payment/services/PaymentService';
 import { ModalComponent, PaymentAction } from 'src/domains/payment/components/modal/modal.component';
 import { Payment } from 'src/domains/payment/models/Payment';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 interface HandleablePayment {
   payment: Payment
@@ -16,25 +16,26 @@ interface HandleablePayment {
   styleUrls: ['./tasks-page.component.scss'],
 })
 
-export class TasksPageComponent implements OnInit {
-
+export class TasksPageComponent implements OnInit, OnDestroy {
   public payments$: BehaviorSubject<Payment[]>;
+  public subscriptions: Subscription[] = [];
 
   constructor(
     private paymentsService: PaymentsService,
-    public dialog: MatDialog
-  ) {
-    this.payments$ = new BehaviorSubject<Payment[]>([])
-  }
+    public dialog: MatDialog) { this.payments$ = new BehaviorSubject<Payment[]>([]) };
 
   ngOnInit(): void {
-    this.refresh()
+    this.refresh();
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
   private refresh(): void {
-    this.paymentsService.getPayments().subscribe(res => {
+    this.subscriptions.push(this.paymentsService.getPayments().subscribe(res => {
       this.payments$.next(res);
-    })
+    }));
   }
 
   public onAddPayment(): void {
@@ -50,15 +51,18 @@ export class TasksPageComponent implements OnInit {
   }
 
   private addPayment(newPayment: Payment): void {
-    this.paymentsService.postPayment(newPayment).pipe().subscribe(() => this.refresh())
+    this.subscriptions.push(
+      this.paymentsService.postPayment(newPayment).pipe().subscribe(() => this.refresh()));
   }
 
   public updatePayment(paymentToBeEdited: Payment): void {
-    this.paymentsService.updatePayment(paymentToBeEdited).pipe().subscribe(() => this.refresh())
+    this.subscriptions.push(
+      this.paymentsService.updatePayment(paymentToBeEdited).pipe().subscribe(() => this.refresh()));
   }
 
   private deletePayment(paymentToBeDeleted: Payment): void {
-    this.paymentsService.deletePayment(paymentToBeDeleted).pipe().subscribe(() => this.refresh())
+    this.subscriptions.push(
+      this.paymentsService.deletePayment(paymentToBeDeleted).pipe().subscribe(() => this.refresh()));
   }
 
   private openModal(title: string, payment: Payment | null, action: PaymentAction): void {
