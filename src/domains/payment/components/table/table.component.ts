@@ -2,9 +2,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChil
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
-import { subscribeOn } from 'rxjs/operators';
 import { Payment } from 'src/domains/payment/models/Payment';
-import { PaymentsService } from '../../services/PaymentService';
 
 @Component({
   selector: 'app-table',
@@ -24,18 +22,19 @@ export class TableComponent implements OnInit, AfterViewInit {
   public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed', 'edit'];
   public dataSource: MatTableDataSource<Payment>;
 
-  public showOptions: boolean = false;
-
   constructor() { }
 
   public ngOnInit(): void {
-    this.payments.subscribe((data) => {
-      this.dataSource.data = data;
-    })
+    this.dataSource = new MatTableDataSource<Payment>();
   }
 
   public ngAfterViewInit(): void {
-    this.dataSource.paginator = this.paginator;
+    this.payments.subscribe((data) => {
+      if (data.length) {
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+      }
+    })
   }
 
   public applyFilter(event: Event) {
@@ -49,7 +48,6 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   public edit(payment: Payment): void {
     this.onEdit.emit(payment)
-    // this.paymentsService.getPaymentsBLA().subscribe(res => this.dataSource.data = res)
   }
 
   public delete(payment: Payment): void {

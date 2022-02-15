@@ -3,7 +3,6 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaymentsService } from 'src/domains/payment/services/PaymentService';
 import { ModalComponent, PaymentAction } from 'src/domains/payment/components/modal/modal.component';
 import { Payment } from 'src/domains/payment/models/Payment';
-import { formatISOFormatToDDMMYYYY, formatNumberToCurrencyString } from 'src/domains/payment/utils/format';
 import { BehaviorSubject } from 'rxjs';
 
 interface HandleablePayment {
@@ -32,7 +31,7 @@ export class TasksPageComponent implements OnInit {
     this.refresh()
   }
 
-  refresh() {
+  private refresh(): void {
     this.paymentsService.getPayments().subscribe(res => {
       this.payments$.next(res);
     })
@@ -75,14 +74,6 @@ export class TasksPageComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: HandleablePayment | null) => {
       this.handleDialogResponse(result)
     })
-  }
-
-  private formatPayment(payment: Payment): Payment {
-    return {
-      ...payment,
-      value: formatNumberToCurrencyString(payment.value),
-      date: formatISOFormatToDDMMYYYY(payment.date),
-    }
   }
 
   private handleDialogResponse(response: HandleablePayment | null): void {

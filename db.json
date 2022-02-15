@@ -1,16 +1,6 @@
 {
   "tasks": [
     {
-      "id": 23,
-      "name": "Tabbatha Kleinbaum",
-      "username": "tkleinbaumm",
-      "title": "Analyst Programmer",
-      "value": 123.02,
-      "date": "2020-05-10T23:59:44Z",
-      "image": "https://robohash.org/harumquibusdamet.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
       "id": 26,
       "name": "Tad Davidowich",
       "username": "tdavidowichp",
