@@ -2,6 +2,7 @@ import { Component, Inject, ChangeDetectionStrategy, ChangeDetectorRef, AfterVie
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Payment } from 'src/domains/payment/models/Payment';
 import { FormBuilder } from '@angular/forms';
+import { formatCurrencyStringToNumber } from 'src/domains/payment/utils/format';
 
 export interface ModalData {
   title: string;
@@ -43,7 +44,6 @@ export class ModalComponent implements AfterViewInit {
     if (!this.data.payment) { return; }
     this.updateFormValues()
     this.changeDetectorRef.detectChanges()
-    console.log(this.data.payment)
   }
 
   private updateFormValues(): void {
@@ -63,16 +63,17 @@ export class ModalComponent implements AfterViewInit {
     const payment = action === PaymentAction.Save ?
       this.createNewPaymentObject() :
       Object.assign(this.data.payment, this.addPaymentForm.value)
-
+    console.log(payment)
     this.dialogRef.close({ payment, action })
   }
 
   private createNewPaymentObject(): Payment {
+    console.log(this.data.payment.id)
     return {
       name: this.addPaymentForm.value.name,
       date: this.addPaymentForm.value.date,
       title: this.addPaymentForm.value.title,
-      value: this.addPaymentForm.value.value
+      value: formatCurrencyStringToNumber(this.addPaymentForm.value.value)
     }
   }
 }

@@ -1,7 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
+import { subscribeOn } from 'rxjs/operators';
 import { Payment } from 'src/domains/payment/models/Payment';
+import { PaymentsService } from '../../services/PaymentService';
 
 @Component({
   selector: 'app-table',
@@ -10,29 +13,34 @@ import { Payment } from 'src/domains/payment/models/Payment';
 })
 
 export class TableComponent implements OnInit, AfterViewInit {
-  @Input() data: Payment[]
+  @Input() payments: Observable<Payment[]>
   @Output() onPaymentChange = new EventEmitter<Payment>();
   @Output() onEdit = new EventEmitter<Payment>();
   @Output() onDelete = new EventEmitter<Payment>();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  // @ViewChild(MatTable, { static: true }) table: MatTable<any>;
+  @ViewChild(MatTable, { static: true }) table: MatTable<any>;
 
   public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed', 'edit'];
-  public dataSource: MatTableDataSource<any>;
+  public dataSource: MatTableDataSource<Payment>;
 
   public showOptions: boolean = false;
 
-  constructor() {
-    this.dataSource = new MatTableDataSource(this.data)
+  constructor() { }
+
+  public ngOnInit(): void {
+    this.payments.subscribe((data) => {
+      this.dataSource.data = data;
+    })
   }
 
-  ngOnInit(): void {
-    this.dataSource = new MatTableDataSource<Payment>(this.data || []);
-  }
-
-  ngAfterViewInit(): void {
+  public ngAfterViewInit(): void {
     this.dataSource.paginator = this.paginator;
+  }
+
+  public applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   public setPaymentStatus(payment: Payment): void {
@@ -41,6 +49,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   public edit(payment: Payment): void {
     this.onEdit.emit(payment)
+    // this.paymentsService.getPaymentsBLA().subscribe(res => this.dataSource.data = res)
   }
 
   public delete(payment: Payment): void {

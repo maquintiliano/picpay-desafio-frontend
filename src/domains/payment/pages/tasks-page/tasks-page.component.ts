@@ -3,7 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PaymentsService } from 'src/domains/payment/services/PaymentService';
 import { ModalComponent, PaymentAction } from 'src/domains/payment/components/modal/modal.component';
 import { Payment } from 'src/domains/payment/models/Payment';
-import { formatDate, formatCurrency } from 'src/domains/payment/utils/format';
+import { formatISOFormatToDDMMYYYY, formatNumberToCurrencyString } from 'src/domains/payment/utils/format';
+import { BehaviorSubject } from 'rxjs';
 
 interface HandleablePayment {
   payment: Payment
@@ -17,16 +18,23 @@ interface HandleablePayment {
 })
 
 export class TasksPageComponent implements OnInit {
+
+  public payments$: BehaviorSubject<Payment[]>;
+
   constructor(
     private paymentsService: PaymentsService,
     public dialog: MatDialog
-  ) { }
-
-  public paymentsData: Payment[] = []
+  ) {
+    this.payments$ = new BehaviorSubject<Payment[]>([])
+  }
 
   ngOnInit(): void {
-    this.paymentsService.getPayments().subscribe((paymentsList: Payment[]) => {
-      return this.paymentsData = paymentsList.map(payment => this.formatPayment(payment))
+    this.refresh()
+  }
+
+  refresh() {
+    this.paymentsService.getPayments().subscribe(res => {
+      this.payments$.next(res);
     })
   }
 
@@ -43,17 +51,15 @@ export class TasksPageComponent implements OnInit {
   }
 
   private addPayment(newPayment: Payment): void {
-    this.paymentsService.postPayment(newPayment).subscribe((payments) => {
-      console.log(payments)
-    })
+    this.paymentsService.postPayment(newPayment).pipe().subscribe(() => this.refresh())
   }
 
   public updatePayment(paymentToBeEdited: Payment): void {
-    this.paymentsService.updatePayment(paymentToBeEdited).subscribe()
+    this.paymentsService.updatePayment(paymentToBeEdited).pipe().subscribe(() => this.refresh())
   }
 
   private deletePayment(paymentToBeDeleted: Payment): void {
-    this.paymentsService.deletePayment(paymentToBeDeleted).subscribe()
+    this.paymentsService.deletePayment(paymentToBeDeleted).pipe().subscribe(() => this.refresh())
   }
 
   private openModal(title: string, payment: Payment | null, action: PaymentAction): void {
@@ -74,8 +80,8 @@ export class TasksPageComponent implements OnInit {
   private formatPayment(payment: Payment): Payment {
     return {
       ...payment,
-      value: formatCurrency(payment.value),
-      date: formatDate(payment.date),
+      value: formatNumberToCurrencyString(payment.value),
+      date: formatISOFormatToDDMMYYYY(payment.date),
     }
   }
 

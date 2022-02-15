@@ -1,52 +1,60 @@
 <div class="table__container">
-  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users">
 
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Usuário </th>
-      <td mat-cell *matCellDef="let element">
-        <p class="table__cell__row--primary">{{element.name}}</p>
-        <span class="table__cel__row--secondary"> @{{element.username}} </span>
-      </td>
-    </ng-container>
+  </mat-paginator>
+  <mat-form-field appearance="standard">
+    <mat-label>Pesquisar por usuário</mat-label>
+    <input class="table__filter-input" matInput (keyup)="applyFilter($event)" #input>
+  </mat-form-field>
 
-    <ng-container matColumnDef="title">
-      <th mat-header-cell *matHeaderCellDef> Título </th>
-      <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-    </ng-container>
+  <div *ngIf="payments">
+    <table mat-table [dataSource]="payments" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Usuário </th>
+        <td mat-cell *matCellDef="let element">
+          <p class="table__cell__row--primary">{{element.name}}</p>
+          <span class="table__cel__row--secondary"> @{{element.username}} </span>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="date">
-      <th mat-header-cell *matHeaderCellDef> Data </th>
-      <td mat-cell *matCellDef="let element">
-        <p class="table__cell__row--primary">{{element.date}}</p>
-        <span class="table__cel__row--secondary">{{element.date}}</span>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Título </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="value">
-      <th mat-header-cell *matHeaderCellDef> Valor </th>
-      <td mat-cell *matCellDef="let element"> {{element.value}} </td>
-    </ng-container>
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Data </th>
+        <td mat-cell *matCellDef="let element">
+          <p class="table__cell__row--primary">{{element.date}}</p>
+          <span class="table__cel__row--secondary">{{element.date}}</span>
+        </td>
+      </ng-container>
 
-    <ng-container matColumnDef="isPayed">
-      <th mat-header-cell *matHeaderCellDef> Pago </th>
-      <td mat-cell *matCellDef="let element">
-        <input class="icon__pay" type="checkbox" [checked]="element.isPayed ? true : false" (click)="setPaymentStatus(element)">
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> Valor </th>
+        <td mat-cell *matCellDef="let element"> {{element.value}} </td>
+      </ng-container>
 
-    <ng-container matColumnDef="edit">
-      <th mat-header-cell edit__remove *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let element">
-        <div class="table__icons-wrapper">
-          <img src="assets/edit.svg" class="table__icon" (click)="edit(element)">
-          <img src="assets/delete.svg" class="table__icon" (click)="delete(element)">
-        </div>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="isPayed">
+        <th mat-header-cell *matHeaderCellDef> Pago </th>
+        <td mat-cell *matCellDef="let element">
+          <input class="icon__pay" type="checkbox" [checked]="element.isPayed ? true : false" (click)="setPaymentStatus(element)">
+        </td>
+      </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table__row">
-    </tr>
-  </table>
+      <ng-container matColumnDef="edit">
+        <th mat-header-cell edit__remove *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let element">
+          <div class="table__icons-wrapper">
+            <img src="assets/edit.svg" class="table__icon" (click)="edit(element)">
+            <img src="assets/delete.svg" class="table__icon" (click)="delete(element)">
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="table__row">
+      </tr>
+    </table>
+  </div>
 </div>

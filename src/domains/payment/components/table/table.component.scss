@@ -70,3 +70,12 @@
 .icon__pay {
   cursor: pointer;
 }
+
+mat-form-field {
+  padding-left: $spacing;
+}
+
+.table__filter-input {
+  padding: $spacing / 4;
+  border: 1px solid $grey;
+}

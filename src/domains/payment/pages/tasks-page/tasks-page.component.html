@@ -1,11 +1,11 @@
-<section class="tasks-page__container" *ngIf="paymentsData.length">
+<section class="tasks-page__container" *ngIf="payments$">
   <div class="tasks-page__header">
     <h2 class="tasks-page__title">Meus pagamentos</h2>
     <button class="button--primary" (click)="onAddPayment()">Adicionar pagamento</button>
   </div>
   <div>
     <app-table
-      [data]="paymentsData"
+      [payments]="payments$.asObservable()"
       (onPaymentChange)="updatePayment($event)"
       (onEdit)="onEditPayment($event)"
       (onDelete)="onDeletePayment($event)">
