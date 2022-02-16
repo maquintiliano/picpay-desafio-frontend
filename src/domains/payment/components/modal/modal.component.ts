@@ -74,11 +74,11 @@ export class ModalComponent implements AfterViewInit {
     }
   }
 
-  public formatDisplayDate(date: string[]) {
+  public formatDisplayDate(date: string[]): string[] {
     return date.slice(0, date.lastIndexOf('/'))
   }
 
-  private formatDateToServer(date: string) {
+  private formatDateToServer(date: string): string {
     const dateToArray = date.split('/').map(element => parseInt(element))
     return new Date(dateToArray[2], dateToArray[1] - 1, dateToArray[0]).toISOString()
   }

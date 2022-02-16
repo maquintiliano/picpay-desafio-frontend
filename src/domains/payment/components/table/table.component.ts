@@ -42,7 +42,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
 
-  public applyFilter(event: Event) {
+  public applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
@@ -59,11 +59,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.onDelete.emit(payment)
   }
 
-  public formatDisplayDate(date: string[]) {
+  public formatDisplayDate(date: string[]): string[] {
     return date.slice(0, date.lastIndexOf('/'))
   }
 
-  public formatDisplayHour(date: string[]) {
+  public formatDisplayHour(date: string[]): string {
     return date.slice(date.lastIndexOf('/')).toString().replace('/', '');
   }
 

@@ -4,7 +4,6 @@ import { BehaviorSubject, Observable, of, throwError } from "rxjs";
 import { User } from "src/domains/login/models/User";
 import { mergeMap } from 'rxjs/operators';
 
-
 @Injectable({
   providedIn: 'root',
 })
