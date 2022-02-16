@@ -1,20 +1,26 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
-import { Payment } from "src/domains/payment/models/Payment";
+import { map } from "rxjs/operators";
+import { Payment } from "src/domains/payment/models/payment";
+import { formatISOFormatToDDMMYYYY, formatNumberToCurrencyString, } from "../utils/format";
 
 @Injectable({
   providedIn: 'root',
 })
 
-export class PaymentsService {
+export class PaymentService {
   constructor(private httpClient: HttpClient) { }
 
   public paymentsUrl = 'http://localhost:3000/tasks';
   public payments = new BehaviorSubject<Payment[]>([]);
 
-  public getPayments(): Observable<Payment[]> {
-    return this.httpClient.get<Payment[]>(this.paymentsUrl)
+  public getPayments() {
+    return this.httpClient.get<Payment[]>(this.paymentsUrl).pipe(
+      map((payments: Payment[]) => {
+        return payments.map((payment) => this.formatPaymentToClient(payment))
+      })
+    )
   }
 
   public postPayment(payment: Payment): Observable<Payment> {
@@ -33,8 +39,11 @@ export class PaymentsService {
     this.payments.next(payments)
   }
 
-  public getPaymentsBLA(): Observable<Payment[]> {
-    console.log('oi')
-    return this.payments.asObservable()
+  private formatPaymentToClient(payment: Payment): Payment {
+    return {
+      ...payment,
+      value: formatNumberToCurrencyString(payment.value),
+      date: formatISOFormatToDDMMYYYY(payment.date)
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, Inject, ChangeDetectionStrategy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Payment } from 'src/domains/payment/models/Payment';
+import { Payment } from 'src/domains/payment/models/payment';
 import { FormBuilder } from '@angular/forms';
 import { formatCurrencyStringToNumber } from 'src/domains/payment/utils/format';
 
@@ -49,7 +49,7 @@ export class ModalComponent implements AfterViewInit {
   private updateFormValues(): void {
     this.addPaymentForm.get('name').setValue(this.data.payment.name)
     this.addPaymentForm.get('value').setValue(this.data.payment.value)
-    this.addPaymentForm.get('date').setValue(this.data.payment.date)
+    this.addPaymentForm.get('date').setValue(this.formatDisplayDate(this.data.payment.date))
     this.addPaymentForm.get('title').setValue(this.data.payment.title)
   }
 
@@ -60,20 +60,26 @@ export class ModalComponent implements AfterViewInit {
   public onSave(): void {
     this.addPaymentForm.updateValueAndValidity()
     const action = this.data.action
-    const payment = action === PaymentAction.Save ?
-      this.createNewPaymentObject() :
-      Object.assign(this.data.payment, this.addPaymentForm.value)
-    console.log(payment)
+    const payment = this.createPaymentObject();
     this.dialogRef.close({ payment, action })
   }
 
-  private createNewPaymentObject(): Payment {
-    console.log(this.data.payment.id)
+  private createPaymentObject(): Payment {
     return {
+      ...this.data.payment,
       name: this.addPaymentForm.value.name,
-      date: this.addPaymentForm.value.date,
+      date: this.formatDateToServer(this.addPaymentForm.value.date),
       title: this.addPaymentForm.value.title,
       value: formatCurrencyStringToNumber(this.addPaymentForm.value.value)
     }
+  }
+
+  public formatDisplayDate(date: string[]) {
+    return date.slice(0, date.lastIndexOf('/'))
+  }
+
+  private formatDateToServer(date: string) {
+    const dateToArray = date.split('/').map(element => parseInt(element))
+    return new Date(dateToArray[2], dateToArray[1] - 1, dateToArray[0]).toISOString()
   }
 }

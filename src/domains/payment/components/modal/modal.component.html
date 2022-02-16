@@ -4,29 +4,36 @@
     <ng-container *ngIf="data.action === PaymentAction.Delete">
       <div class="modal__delete-infos">
         <p>Usuário: {{data.payment.name}}</p>
-        <p>Data: {{data.payment.date}}</p>
-        <p>Valor: {{data.payment.value}}</p>
+        <p>Data: {{formatDisplayDate(data.payment.date)}}</p>
+        <p>Valor: R$ {{data.payment.value}}</p>
       </div>
     </ng-container>
     <ng-container *ngIf="data.action !== PaymentAction.Delete">
       <form class="modal__form" [formGroup]="addPaymentForm">
-        <div>
+        <div class="inputs__wrapper">
           <input
+            class="modal__input"
             type="text"
             formControlName="name"
             placeholder="Usuário*"
             required>
-          <input
-            formControlName="value"
-            placeholder="Valor* (formato: R$ XX,XX)"
-            required>
+          <div class="modal__input-currency-wrapper modal__input">
+            <input class="input__fixed-currency" type="text" value="R$" disabled>
+            <input
+              formControlName="value"
+              placeholder="Valor* (ex.: R$ 38,64)"
+              required>
+          </div>
         </div>
-        <div>
+        <div class="inputs__wrapper">
           <input
+            class="modal__input"
             formControlName="date"
-            placeholder="Data* (formato: dd/mm/aaaa)"
+            placeholder="Data* (ex.: 13/11/2022)"
+            type="string"
             required>
           <input
+            class="modal__input"
             type="text"
             formControlName="title"
             placeholder="Título">

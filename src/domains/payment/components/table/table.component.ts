@@ -58,4 +58,13 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   public delete(payment: Payment): void {
     this.onDelete.emit(payment)
   }
+
+  public formatDisplayDate(date: string[]) {
+    return date.slice(0, date.lastIndexOf('/'))
+  }
+
+  public formatDisplayHour(date: string[]) {
+    return date.slice(date.lastIndexOf('/')).toString().replace('/', '');
+  }
+
 }
