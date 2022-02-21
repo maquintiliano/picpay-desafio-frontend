@@ -1,0 +1,53 @@
+<div class="main">
+	<mat-card class="login-card">
+		<div class="toolbar">
+			<img src="assets/Logo.png" alt="logo" class="logo" />
+			<mat-toolbar>Bem vindo de volta</mat-toolbar>
+		</div>
+		<form>
+			<mat-form-field appearance="outline" floatLabel="always">
+				<mat-label>Email</mat-label>
+				<input
+					[(ngModel)]="auth.email"
+					matInput
+					required="true"
+					name="email"
+					type="email"
+				/>
+			</mat-form-field>
+			<mat-form-field appearance="outline" floatLabel="always">
+				<mat-label>Senha</mat-label>
+				<input
+					[(ngModel)]="auth.password"
+					matInput
+					required="true"
+					name="password"
+					[type]="hide ? 'password' : 'text'"
+				/>
+				<button
+					class="hide"
+					mat-icon-button
+					matSuffix
+					(click)="hide = !hide"
+					[attr.aria-label]="'Hide password'"
+					[attr.aria-pressed]="hide"
+				>
+					<i class="material-icons">{{
+						hide ? 'visibility_off' : 'visibility'
+					}}</i>
+				</button>
+			</mat-form-field>
+		</form>
+		<button
+			mat-raised-button
+			type="submit"
+			(click)="getAuthenticate()"
+			[disabled]="auth.email == '' || auth.password == ''"
+		>
+			ENTRAR
+		</button>
+	</mat-card>
+	<mat-card class="img-card">
+		<img src="assets/side-login.png" alt="sider" class="sider" />
+	</mat-card>
+</div>
