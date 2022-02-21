@@ -1,0 +1,25 @@
+.content {
+	font-size: 1rem;
+	font-weight: 1em;
+}
+.actions {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 40px;
+}
+button {
+	height: 30px;
+	width: 150px;
+	border-radius: 7px;
+	border-style: none;
+	font-weight: 500;
+}
+.btn-delete {
+	background-color: rgb(29, 119, 255);
+	color: #fff;
+}
+
+.btn-cancel {
+	background-color: #f5f5f5;
+	color: #000;
+}

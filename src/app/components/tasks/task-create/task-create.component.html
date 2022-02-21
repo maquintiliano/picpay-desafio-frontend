@@ -1,0 +1,58 @@
+<mat-card-title> Adicionar pagamento </mat-card-title>
+<form>
+	<mat-form-field appearance="outline">
+		<mat-label>Usuário</mat-label>
+		<input
+			[(ngModel)]="task.name"
+			matInput
+			required="true"
+			name="name"
+			placeholder="Usuário*"
+		/>
+	</mat-form-field>
+
+	<mat-form-field appearance="outline">
+		<mat-label>Data</mat-label>
+		<input
+			[(ngModel)]="task.date"
+			matInput
+			required="true"
+			name="date"
+			placeholder="Data"
+		/>
+	</mat-form-field>
+	<mat-form-field appearance="outline">
+		<mat-label>Valor</mat-label>
+		<input
+			[(ngModel)]="task.value"
+			matInput
+			required="true"
+			name="value"
+			type="number"
+			placeholder="Valor"
+		/>
+	</mat-form-field>
+	<mat-form-field appearance="outline">
+		<mat-label>Título</mat-label>
+		<input
+			[(ngModel)]="task.title"
+			matInput
+			required="false"
+			name="title"
+			placeholder="Título"
+		/>
+	</mat-form-field>
+</form>
+<div>
+	<button mat-raised-button class="btn-cancel" (click)="onClose()">
+		CANCELAR
+	</button>
+	<button
+		mat-raised-button
+		class="btn-save"
+		(click)="task.id !== undefined ? editTask() : createTask()"
+		[disabled]="task.name == '' || task.date == '' || task.value == null"
+	>
+		SALVAR
+	</button>
+</div>

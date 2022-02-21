@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Excluir pagamento</h2>
+<div mat-dialog-content div="content">
+	<p>Usuário: {{ task.name }}</p>
+	<p>Data: {{ task.date }}</p>
+	<p>Valor: R$ {{ task.value }}</p>
+</div>
+<div mat-dialog-actions class="actions">
+	<button mat-raised-button class="btn-cancel" (click)="onClose()">
+		CANCELAR
+	</button>
+	<button mat-raised-button class="btn-delete" (click)="deleteTask(task.id)">
+		SALVAR
+	</button>
+</div>
